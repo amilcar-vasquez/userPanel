@@ -1,43 +1,34 @@
 <script lang="ts">
-	import { isAuthenticated } from '$lib/stores/auth';
-	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import '@material/web/button/filled-button.js';
 	import '@material/web/button/outlined-button.js';
 	import '@material/web/icon/icon.js';
-
-	let authenticated = false;
-	isAuthenticated.subscribe((value) => (authenticated = value));
-
-	onMount(() => {
-		// Redirect to appropriate page
-		if (authenticated) {
-			goto('/profile');
-		} else {
-			goto('/login');
-		}
-	});
 </script>
 
 <svelte:head>
-	<title>Auth Service</title>
+	<title>Project Showcase — Home</title>
 </svelte:head>
 
 <div class="container">
 	<div class="hero">
-		<md-icon class="hero-icon">lock</md-icon>
-		<h1>Auth Service</h1>
-		<p class="subtitle">Secure authentication for your applications</p>
+		<md-icon class="hero-icon">insights</md-icon>
+		<h1>GitHub Profile Showcase</h1>
+		<p class="subtitle">A minimal UI to showcase two GitHub profiles, projects, and analytics.</p>
 
 		<div class="actions">
-			<md-filled-button href="/login">
-				<md-icon slot="icon">login</md-icon>
-				Sign In
+			<md-filled-button href="/dashboard">
+				<md-icon slot="icon">dashboard</md-icon>
+				View Dashboard
 			</md-filled-button>
-			<md-outlined-button href="/register">
-				<md-icon slot="icon">person_add</md-icon>
-				Create Account
+			<md-outlined-button href="/profiles">
+				<md-icon slot="icon">people</md-icon>
+				Browse Profiles
 			</md-outlined-button>
+		</div>
+
+		<div class="quick-links">
+			<a href="/profiles/alice">Profile: Alice</a>
+			<a href="/profiles/bob">Profile: Bob</a>
+			<a href="/projects">All Projects</a>
 		</div>
 	</div>
 </div>
@@ -47,53 +38,32 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-height: 100vh;
+		min-height: 80vh;
 		padding: 24px;
-		background: var(--md-sys-color-surface-container-low);
 	}
 
 	.hero {
 		text-align: center;
-		max-width: 600px;
+		max-width: 760px;
+		background: var(--md-sys-color-surface);
+		padding: 36px;
+		border-radius: 16px;
+		box-shadow: var(--md-sys-elevation-1);
 	}
 
 	.hero-icon {
-		font-size: 96px;
+		font-size: 72px;
 		color: var(--md-sys-color-primary);
-		margin-bottom: 24px;
+		margin-bottom: 16px;
 	}
 
-	h1 {
-		font-size: 48px;
-		font-weight: 500;
-		color: var(--md-sys-color-on-surface);
-		margin: 0 0 16px 0;
-	}
+	h1 { margin: 0 0 8px 0; }
 
-	.subtitle {
-		font-size: 20px;
-		color: var(--md-sys-color-on-surface-variant);
-		margin: 0 0 48px 0;
-	}
+	.subtitle { margin: 0 0 20px 0; color: var(--md-sys-color-on-surface-variant); }
 
-	.actions {
-		display: flex;
-		gap: 16px;
-		justify-content: center;
-		flex-wrap: wrap;
-	}
+	.actions { display:flex; gap:12px; justify-content:center; margin-bottom: 16px; }
 
-	@media (max-width: 600px) {
-		h1 {
-			font-size: 36px;
-		}
+	.quick-links { display:flex; gap:12px; justify-content:center; margin-top: 8px; }
 
-		.subtitle {
-			font-size: 18px;
-		}
-
-		.hero-icon {
-			font-size: 72px;
-		}
-	}
+	.quick-links a { color: var(--md-sys-color-primary); text-decoration: none; }
 </style>

@@ -54,6 +54,7 @@
 		<div class="header">
 			<h1>Welcome Back</h1>
 			<p class="subtitle">Sign in to your account</p>
+			<p class="project-info">This app demonstrates a small GitHub profile showcase for two people — profiles, projects, and a dashboard with analytics placeholders.</p>
 		</div>
 
 		<form on:submit|preventDefault={handleLogin}>
