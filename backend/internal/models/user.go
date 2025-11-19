@@ -8,12 +8,14 @@ import (
 
 // User represents a user in the system
 type User struct {
-	ID           uint           `gorm:"primaryKey" json:"id"`
-	Name         string         `gorm:"not null" json:"name"`
-	Email        string         `gorm:"uniqueIndex;not null" json:"email"`
-	PasswordHash string         `gorm:"not null" json:"-"` // Never expose password hash in JSON
-	Avatar       string         `json:"avatar,omitempty"`
-	CreatedAt    time.Time      `json:"created_at"`
-	UpdatedAt    time.Time      `json:"updated_at"`
-	DeletedAt    gorm.DeletedAt `gorm:"index" json:"-"`
+	ID             uint           `gorm:"primaryKey" json:"id"`
+	Name           string         `gorm:"not null" json:"name"`
+	Email          string         `gorm:"uniqueIndex;not null" json:"email"`
+	PasswordHash   string         `gorm:"not null" json:"-"` // Never expose password hash in JSON
+	Avatar         string         `json:"avatar,omitempty"`
+	GithubUsername string         `json:"github_username,omitempty"`
+	GithubToken    string         `json:"-"` // Never expose GitHub token in JSON
+	CreatedAt      time.Time      `json:"created_at"`
+	UpdatedAt      time.Time      `json:"updated_at"`
+	DeletedAt      gorm.DeletedAt `gorm:"index" json:"-"`
 }

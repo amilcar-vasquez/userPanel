@@ -48,3 +48,8 @@ func RespondSuccessWithMessage(w http.ResponseWriter, message string) {
 		Message: message,
 	})
 }
+
+// ParseJSON parses JSON request body into the provided struct
+func ParseJSON(r *http.Request, v interface{}) error {
+	return json.NewDecoder(r.Body).Decode(v)
+}

@@ -120,10 +120,14 @@
 			<md-divider></md-divider>
 
 			<div class="profile-actions">
-				<md-filled-button on:click={handleEdit} style="flex: 1;">
+				<md-filled-button href="/profile/github" style="flex: 1;">
+					<md-icon slot="icon">code</md-icon>
+					GitHub Profile
+				</md-filled-button>
+				<md-outlined-button on:click={handleEdit} style="flex: 1;">
 					<md-icon slot="icon">edit</md-icon>
 					Edit Profile
-				</md-filled-button>
+				</md-outlined-button>
 				<md-outlined-button on:click={handleLogout} style="flex: 1;">
 					<md-icon slot="icon">logout</md-icon>
 					Logout

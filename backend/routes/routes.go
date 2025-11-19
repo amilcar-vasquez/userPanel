@@ -31,6 +31,10 @@ func SetupRoutes(r *chi.Mux, db *gorm.DB) {
 			r.Get("/profile", userHandler.GetProfile)
 			r.Put("/profile", userHandler.UpdateProfile)
 			r.Delete("/profile", userHandler.DeleteProfile)
+
+			// GitHub integration routes
+			r.Get("/github/profile", handlers.GetGithubProfile(db))
+			r.Put("/github/credentials", handlers.UpdateGithubCredentials(db))
 		})
 	})
 }
