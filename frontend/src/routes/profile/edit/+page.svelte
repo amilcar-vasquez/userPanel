@@ -11,7 +11,6 @@
 	import type { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 
 	let nameField: MdOutlinedTextField;
-	let avatarField: MdOutlinedTextField;
 	let authState: any;
 	let loading = false;
 
@@ -29,7 +28,6 @@
 
 	async function handleSave() {
 		const name = nameField?.value || '';
-		const avatar = avatarField?.value || '';
 
 		if (!name.trim()) {
 			toast.error('Name cannot be empty');
@@ -38,7 +36,7 @@
 
 		loading = true;
 		try {
-			await auth.updateProfile({ name, avatar });
+			await auth.updateProfile({ name });
 			toast.success('Profile updated successfully');
 			goto('/profile');
 		} catch (error: any) {
@@ -60,8 +58,8 @@
 <div class="container">
 	<div class="card">
 		<div class="header">
-			<h1>Edit Profile</h1>
-			<p class="subtitle">Update your personal information</p>
+			<h1>Edit Name</h1>
+			<p class="subtitle">Update your full name</p>
 		</div>
 
 		{#if authState.user}
@@ -76,19 +74,6 @@
 						style="width: 100%;"
 					>
 						<md-icon slot="leading-icon">person</md-icon>
-					</md-outlined-text-field>
-				</div>
-
-				<div class="form-field">
-					<md-outlined-text-field
-						bind:this={avatarField}
-						label="Avatar URL"
-						type="url"
-						value={authState.user.avatar || ''}
-						supporting-text="Optional: URL to your profile image"
-						style="width: 100%;"
-					>
-						<md-icon slot="leading-icon">image</md-icon>
 					</md-outlined-text-field>
 				</div>
 

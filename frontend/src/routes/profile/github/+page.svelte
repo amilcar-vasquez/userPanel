@@ -117,6 +117,10 @@
 	<div class="header">
 		<h1 class="page-title">GitHub Profile</h1>
 		<div class="header-actions">
+			<md-outlined-button href="/profile">
+				<md-icon slot="icon">account_circle</md-icon>
+				Account Info
+			</md-outlined-button>
 			<md-outlined-button on:click={() => settingsDialog.show()}>
 				<md-icon slot="icon">settings</md-icon>
 				Settings
@@ -294,7 +298,7 @@
 
 <!-- Settings Dialog -->
 <md-dialog bind:this={settingsDialog}>
-	<div slot="headline">GitHub Settings</div>
+	<div slot="headline" style="padding: 0 24px;">GitHub Settings</div>
 	<div slot="content" class="dialog-content">
 		<p class="dialog-description">
 			Enter your GitHub username and a Personal Access Token with <code>read:user</code> and
@@ -326,7 +330,7 @@
 			</a>
 		</p>
 	</div>
-	<div slot="actions">
+	<div slot="actions" style="padding: 0 24px 8px 24px;">
 		<md-text-button on:click={() => settingsDialog.close()}>Cancel</md-text-button>
 		<md-filled-button on:click={handleSaveCredentials} disabled={savingCredentials}>
 			{savingCredentials ? 'Saving...' : 'Save'}
@@ -399,7 +403,10 @@
 	}
 
 	.error-icon {
+		width: 64px;
+		height: 64px;
 		font-size: 64px;
+		--md-icon-size: 64px;
 		color: var(--md-sys-color-error);
 		margin-bottom: 16px;
 	}
@@ -600,7 +607,10 @@
 	}
 
 	.stat-icon {
-		font-size: 32px;
+		width: 40px;
+		height: 40px;
+		font-size: 40px;
+		--md-icon-size: 40px;
 		color: var(--md-sys-color-primary);
 		margin-bottom: 12px;
 	}
@@ -753,7 +763,10 @@
 	}
 
 	.repo-stat md-icon {
-		font-size: 16px;
+		width: 18px;
+		height: 18px;
+		font-size: 18px;
+		--md-icon-size: 18px;
 	}
 
 	.danger-zone {
@@ -768,6 +781,7 @@
 		flex-direction: column;
 		gap: 8px;
 		min-width: 400px;
+		padding: 8px 24px 16px 24px;
 	}
 
 	.dialog-description {

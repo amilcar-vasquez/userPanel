@@ -107,7 +107,6 @@ md-icon {
 	font-family: 'Material Symbols Outlined' !important;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 24px;
 	line-height: 1;
 	letter-spacing: normal;
 	text-transform: none;
@@ -118,5 +117,25 @@ md-icon {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Material Web Components - Fix icon overflow */
+md-outlined-button,
+md-filled-button,
+md-text-button,
+md-outlined-text-field {
+	overflow: visible !important;
+}
+
+md-outlined-button md-icon,
+md-filled-button md-icon,
+md-text-button md-icon,
+md-outlined-text-field md-icon {
+	overflow: visible !important;
+}
+
+/* Ensure Material Web text fields have proper height */
+md-outlined-text-field {
+	min-height: 56px;
 }
 

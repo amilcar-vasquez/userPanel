@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { auth, isAuthenticated, userInitials } from '$lib/stores/auth';
+	import { auth, isAuthenticated } from '$lib/stores/auth';
 	import { toast } from '$lib/stores/toast';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import '@material/web/button/filled-button.js';
 	import '@material/web/button/outlined-button.js';
 	import '@material/web/button/text-button.js';
-	import '@material/web/fab/fab.js';
 	import '@material/web/icon/icon.js';
 	import '@material/web/progress/circular-progress.js';
 	import '@material/web/divider/divider.js';
@@ -15,11 +14,9 @@
 
 	let deleteDialog: MdDialog;
 	let authState: any;
-	let initials: string;
 	let loading = true;
 
 	auth.subscribe((value) => (authState = value));
-	userInitials.subscribe((value) => (initials = value));
 
 	onMount(() => {
 		// Redirect if not authenticated
@@ -85,16 +82,7 @@
 			</div>
 		{:else if authState.user}
 			<div class="profile-header">
-				<div class="avatar-container">
-					{#if authState.user.avatar}
-						<img src={authState.user.avatar} alt={authState.user.name} class="avatar-image" />
-					{:else}
-						<md-fab class="avatar-fab" size="large" label="User avatar">
-							<md-icon slot="icon">{initials}</md-icon>
-						</md-fab>
-					{/if}
-				</div>
-				<h1 class="user-name">{authState.user.name}</h1>
+				<h1 class="user-name">Account Information</h1>
 				<p class="user-email">{authState.user.email}</p>
 			</div>
 
@@ -121,16 +109,12 @@
 
 			<div class="profile-actions">
 				<md-filled-button href="/profile/github" style="flex: 1;">
-					<md-icon slot="icon">code</md-icon>
-					GitHub Profile
+					<md-icon slot="icon">arrow_back</md-icon>
+					Back to GitHub Profile
 				</md-filled-button>
 				<md-outlined-button on:click={handleEdit} style="flex: 1;">
 					<md-icon slot="icon">edit</md-icon>
-					Edit Profile
-				</md-outlined-button>
-				<md-outlined-button on:click={handleLogout} style="flex: 1;">
-					<md-icon slot="icon">logout</md-icon>
-					Logout
+					Edit Name
 				</md-outlined-button>
 			</div>
 
@@ -202,26 +186,6 @@
 	.profile-header {
 		text-align: center;
 		margin-bottom: 32px;
-	}
-
-	.avatar-container {
-		display: flex;
-		justify-content: center;
-		margin-bottom: 24px;
-	}
-
-	.avatar-image {
-		width: 96px;
-		height: 96px;
-		border-radius: 50%;
-		object-fit: cover;
-	}
-
-	.avatar-fab {
-		--md-fab-container-height: 96px;
-		--md-fab-container-width: 96px;
-		font-size: 32px;
-		font-weight: 500;
 	}
 
 	.user-name {

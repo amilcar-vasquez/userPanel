@@ -77,12 +77,12 @@ function createAuthStore() {
 						localStorage.setItem('auth_user', JSON.stringify(user));
 					}
 
-					// Update store
-					set({ token, user, loading: false, error: null });
+				// Update store
+				set({ token, user, loading: false, error: null });
 
-					// Redirect to profile
-					goto('/profile');
-				}
+				// Redirect to GitHub profile
+				goto('/profile/github');
+			}
 			} catch (error) {
 				const errorMessage =
 					error instanceof api.ApiError ? error.message : 'Registration failed';
@@ -112,15 +112,15 @@ function createAuthStore() {
 						localStorage.setItem('auth_user', JSON.stringify(user));
 					}
 
-					// Update store
-					set({ token, user, loading: false, error: null });
+				// Update store
+				set({ token, user, loading: false, error: null });
 
-					// Redirect to profile
-					goto('/profile');
-				}
-			} catch (error) {
-				const errorMessage = error instanceof api.ApiError ? error.message : 'Login failed';
-				update((state) => ({ ...state, loading: false, error: errorMessage }));
+				// Redirect to GitHub profile
+				goto('/profile/github');
+			}
+		} catch (error) {
+			const errorMessage = error instanceof api.ApiError ? error.message : 'Login failed';
+			update((state) => ({ ...state, loading: false, error: errorMessage }));
 				throw error;
 			}
 		},
