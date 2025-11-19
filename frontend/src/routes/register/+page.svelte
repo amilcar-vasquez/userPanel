@@ -70,56 +70,48 @@
 		</div>
 
 		<form on:submit|preventDefault={handleRegister}>
-			<div class="form-field">
-				<md-outlined-text-field
-					label="Full Name"
-					type="text"
-					value={name}
-					on:input={(e) => (name = e.target.value)}
-					on:keypress={handleKeyPress}
-					required
-					style="width: 100%;"
-				/>
-			</div>
-
-			<div class="form-field">
-				<md-outlined-text-field
-					label="Email"
-					type="email"
-					value={email}
-					on:input={(e) => (email = e.target.value)}
-					on:keypress={handleKeyPress}
-					required
-					style="width: 100%;"
-				/>
-			</div>
-
-			<div class="form-field">
-				<md-outlined-text-field
-					label="Password"
-					type="password"
-					value={password}
-					on:input={(e) => (password = e.target.value)}
-					on:keypress={handleKeyPress}
-					required
-					supporting-text="Minimum 6 characters"
-					style="width: 100%;"
-				/>
-			</div>
-
-			<div class="form-field">
-				<md-outlined-text-field
-					label="Confirm Password"
-					type="password"
-					value={confirmPassword}
-					on:input={(e) => (confirmPassword = e.target.value)}
-					on:keypress={handleKeyPress}
-					required
-					style="width: 100%;"
-				/>
-			</div>
-
-			<div class="actions">
+		<div class="form-field">
+			<md-outlined-text-field
+				label="Full Name"
+				type="text"
+				value={name}
+				on:input={(e: any) => (name = e.target.value)}
+				on:keypress={handleKeyPress}
+				required
+				style="width: 100%;"
+			/>
+		</div>		<div class="form-field">
+			<md-outlined-text-field
+				label="Email"
+				type="email"
+				value={email}
+				on:input={(e: any) => (email = e.target.value)}
+				on:keypress={handleKeyPress}
+				required
+				style="width: 100%;"
+			/>
+		</div>		<div class="form-field">
+			<md-outlined-text-field
+				label="Password"
+				type="password"
+				value={password}
+				on:input={(e: any) => (password = e.target.value)}
+				on:keypress={handleKeyPress}
+				required
+				supporting-text="Minimum 6 characters"
+				style="width: 100%;"
+			/>
+		</div>		<div class="form-field">
+			<md-outlined-text-field
+				label="Confirm Password"
+				type="password"
+				value={confirmPassword}
+				on:input={(e: any) => (confirmPassword = e.target.value)}
+				on:keypress={handleKeyPress}
+				required
+				style="width: 100%;"
+			/>
+		</div>			<div class="actions">
 				<md-filled-button type="submit" disabled={loading} style="width: 100%;">
 					{#if loading}
 						<md-circular-progress indeterminate slot="icon" style="--md-circular-progress-size: 20px;" />

@@ -57,31 +57,27 @@
 		</div>
 
 		<form on:submit|preventDefault={handleLogin}>
-			<div class="form-field">
-				<md-outlined-text-field
-					label="Email"
-					type="email"
-					value={email}
-					on:input={(e) => (email = e.target.value)}
-					on:keypress={handleKeyPress}
-					required
-					style="width: 100%;"
-				/>
-			</div>
-
-			<div class="form-field">
-				<md-outlined-text-field
-					label="Password"
-					type="password"
-					value={password}
-					on:input={(e) => (password = e.target.value)}
-					on:keypress={handleKeyPress}
-					required
-					style="width: 100%;"
-				/>
-			</div>
-
-			<div class="actions">
+		<div class="form-field">
+			<md-outlined-text-field
+				label="Email"
+				type="email"
+				value={email}
+				on:input={(e: any) => (email = e.target.value)}
+				on:keypress={handleKeyPress}
+				required
+				style="width: 100%;"
+			/>
+		</div>		<div class="form-field">
+			<md-outlined-text-field
+				label="Password"
+				type="password"
+				value={password}
+				on:input={(e: any) => (password = e.target.value)}
+				on:keypress={handleKeyPress}
+				required
+				style="width: 100%;"
+			/>
+		</div>			<div class="actions">
 				<md-filled-button type="submit" disabled={loading} style="width: 100%;">
 					{#if loading}
 						<md-circular-progress indeterminate slot="icon" style="--md-circular-progress-size: 20px;" />
