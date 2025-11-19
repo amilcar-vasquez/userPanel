@@ -39,7 +39,16 @@ func GetGithubProfile(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		utils.RespondSuccess(w, stats)
+		// Calculate developer rank
+		rank := github.CalculateRank(*stats)
+
+		// Return stats with rank information
+		response := map[string]interface{}{
+			"profile": stats,
+			"rank":    rank,
+		}
+
+		utils.RespondSuccess(w, response)
 	}
 }
 

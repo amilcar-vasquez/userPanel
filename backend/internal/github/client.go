@@ -17,7 +17,9 @@ type UserProfileStats struct {
 	TotalCommits            int                  `json:"total_commits"`
 	TotalPullRequests       int                  `json:"total_pull_requests"`
 	TotalIssues             int                  `json:"total_issues"`
+	TotalReviews            int                  `json:"total_reviews"`
 	TotalStarsEarned        int                  `json:"total_stars_earned"`
+	Followers               int                  `json:"followers"`
 	ContributionCalendar    ContributionCalendar `json:"contribution_calendar"`
 	PinnedRepositories      []Repository         `json:"pinned_repositories"`
 	TotalPublicRepositories int                  `json:"total_public_repositories"`
@@ -60,15 +62,19 @@ type Language struct {
 // UserProfileQuery is the GraphQL query structure for GitHub API
 type UserProfileQuery struct {
 	User struct {
-		Login                   githubv4.String
-		Name                    githubv4.String
-		AvatarURL               githubv4.String `graphql:"avatarUrl"`
-		Bio                     githubv4.String
+		Login     githubv4.String
+		Name      githubv4.String
+		AvatarURL githubv4.String `graphql:"avatarUrl"`
+		Bio       githubv4.String
+		Followers struct {
+			TotalCount githubv4.Int
+		}
 		ContributionsCollection struct {
-			TotalCommitContributions      githubv4.Int
-			TotalPullRequestContributions githubv4.Int
-			TotalIssueContributions       githubv4.Int
-			ContributionCalendar          struct {
+			TotalCommitContributions            githubv4.Int
+			TotalPullRequestContributions       githubv4.Int
+			TotalIssueContributions             githubv4.Int
+			TotalPullRequestReviewContributions githubv4.Int
+			ContributionCalendar                struct {
 				TotalContributions githubv4.Int
 				Weeks              []struct {
 					ContributionDays []struct {
@@ -187,7 +193,9 @@ func FetchUserProfile(username, token string) (*UserProfileStats, error) {
 		TotalCommits:            int(query.User.ContributionsCollection.TotalCommitContributions),
 		TotalPullRequests:       int(query.User.ContributionsCollection.TotalPullRequestContributions),
 		TotalIssues:             int(query.User.ContributionsCollection.TotalIssueContributions),
+		TotalReviews:            int(query.User.ContributionsCollection.TotalPullRequestReviewContributions),
 		TotalStarsEarned:        totalStarsEarned,
+		Followers:               int(query.User.Followers.TotalCount),
 		ContributionCalendar:    contributionCalendar,
 		PinnedRepositories:      pinnedRepos,
 		TotalPublicRepositories: int(query.User.Repositories.TotalCount),

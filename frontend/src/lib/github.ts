@@ -8,7 +8,9 @@ export interface GitHubProfileStats {
 	total_commits: number;
 	total_pull_requests: number;
 	total_issues: number;
+	total_reviews: number;
 	total_stars_earned: number;
+	followers: number;
 	contribution_calendar: ContributionCalendar;
 	pinned_repositories: Repository[];
 	total_public_repositories: number;
@@ -43,11 +45,24 @@ export interface Language {
 	color: string;
 }
 
+export interface RankInfo {
+	rank: string;
+	score: number;
+	next_rank?: string;
+	next_rank_threshold?: number;
+	progress_percent: number;
+}
+
+export interface GitHubProfileResponse {
+	profile: GitHubProfileStats;
+	rank: RankInfo;
+}
+
 /**
- * Fetch GitHub profile stats for the authenticated user
+ * Fetch GitHub profile stats and rank for the authenticated user
  */
-export async function fetchGithubProfile(): Promise<GitHubProfileStats> {
-	const response = await api.get<GitHubProfileStats>('/github/profile');
+export async function fetchGithubProfile(): Promise<GitHubProfileResponse> {
+	const response = await api.get<GitHubProfileResponse>('/github/profile');
 	return response.data!;
 }
 

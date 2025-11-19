@@ -4,7 +4,7 @@
 	import { toast } from '$lib/stores/toast';
 	import { goto } from '$app/navigation';
 	import * as github from '$lib/github';
-	import type { GitHubProfileStats } from '$lib/github';
+	import type { GitHubProfileStats, RankInfo, GitHubProfileResponse } from '$lib/github';
 	import '@material/web/button/filled-button.js';
 	import '@material/web/button/outlined-button.js';
 	import '@material/web/button/text-button.js';
@@ -17,6 +17,7 @@
 	import type { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field.js';
 
 	let githubStats: GitHubProfileStats | null = null;
+	let rankInfo: RankInfo | null = null;
 	let loading = true;
 	let error: string | null = null;
 	let authState: any;
@@ -45,7 +46,9 @@
 		loading = true;
 		error = null;
 		try {
-			githubStats = await github.fetchGithubProfile();
+			const response = await github.fetchGithubProfile();
+			githubStats = response.profile;
+			rankInfo = response.rank;
 		} catch (err: any) {
 			error = err.message || 'Failed to load GitHub profile';
 			console.error('GitHub profile error:', err);
@@ -153,6 +156,39 @@
 			</div>
 		</div>
 
+		<!-- Rank Card -->
+		{#if rankInfo}
+			<div class="rank-section">
+				<div class="rank-card">
+					<div class="rank-header">
+						<div class="rank-badge rank-{rankInfo.rank.toLowerCase().replace('+', 'plus')}">
+							<span class="rank-tier">{rankInfo.rank}</span>
+						</div>
+						<div class="rank-info">
+							<h3>Developer Rank</h3>
+							<p class="rank-score">Score: {rankInfo.score.toLocaleString()}</p>
+						</div>
+					</div>
+					{#if rankInfo.next_rank}
+						<div class="rank-progress">
+							<div class="progress-header">
+								<span>Progress to {rankInfo.next_rank}</span>
+								<span>{rankInfo.progress_percent}%</span>
+							</div>
+							<div class="progress-bar">
+								<div class="progress-fill" style="width: {rankInfo.progress_percent}%"></div>
+							</div>
+							<p class="next-threshold">
+								{(rankInfo.next_rank_threshold! - rankInfo.score).toLocaleString()} points to next rank
+							</p>
+						</div>
+					{:else}
+						<p class="max-rank">🎉 Maximum rank achieved!</p>
+					{/if}
+				</div>
+			</div>
+		{/if}
+
 		<!-- Stats Cards -->
 		<div class="stats-grid">
 			<div class="stat-card">
@@ -170,10 +206,20 @@
 				<div class="stat-value">{githubStats.total_issues.toLocaleString()}</div>
 				<div class="stat-label">Issues</div>
 			</div>
+			<div class="stat-card">
+				<md-icon class="stat-icon">rate_review</md-icon>
+				<div class="stat-value">{githubStats.total_reviews.toLocaleString()}</div>
+				<div class="stat-label">Reviews</div>
+			</div>
 			<div class="stat-card highlight">
 				<md-icon class="stat-icon">star</md-icon>
 				<div class="stat-value">{githubStats.total_stars_earned.toLocaleString()}</div>
 				<div class="stat-label">Stars Earned</div>
+			</div>
+			<div class="stat-card">
+				<md-icon class="stat-icon">group</md-icon>
+				<div class="stat-value">{githubStats.followers.toLocaleString()}</div>
+				<div class="stat-label">Followers</div>
 			</div>
 		</div>
 
@@ -397,6 +443,132 @@
 		font-size: 16px;
 		color: var(--md-sys-color-on-surface);
 		margin: 0;
+	}
+
+	.rank-section {
+		margin-bottom: 32px;
+	}
+
+	.rank-card {
+		background: linear-gradient(135deg, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-tertiary-container) 100%);
+		padding: 32px;
+		border-radius: 24px;
+		box-shadow: var(--md-sys-elevation-2);
+	}
+
+	.rank-header {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		margin-bottom: 24px;
+	}
+
+	.rank-badge {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 32px;
+		font-weight: 700;
+		box-shadow: var(--md-sys-elevation-3);
+	}
+
+	.rank-badge.rank-splus {
+		background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+		color: #000;
+	}
+
+	.rank-badge.rank-s {
+		background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+		color: #fff;
+	}
+
+	.rank-badge.rank-aplus {
+		background: linear-gradient(135deg, #00ced1 0%, #1e90ff 100%);
+		color: #fff;
+	}
+
+	.rank-badge.rank-a {
+		background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+		color: #fff;
+	}
+
+	.rank-badge.rank-bplus {
+		background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+		color: #000;
+	}
+
+	.rank-badge.rank-b {
+		background: linear-gradient(135deg, #c0c0c0 0%, #808080 100%);
+		color: #000;
+	}
+
+	.rank-badge.rank-c {
+		background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+		color: #fff;
+	}
+
+	.rank-tier {
+		font-size: 32px;
+		font-weight: 700;
+	}
+
+	.rank-info h3 {
+		margin: 0 0 8px 0;
+		font-size: 24px;
+		font-weight: 500;
+		color: var(--md-sys-color-on-primary-container);
+	}
+
+	.rank-score {
+		margin: 0;
+		font-size: 16px;
+		color: var(--md-sys-color-on-tertiary-container);
+		font-weight: 500;
+	}
+
+	.rank-progress {
+		margin-top: 16px;
+	}
+
+	.progress-header {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 8px;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--md-sys-color-on-primary-container);
+	}
+
+	.progress-bar {
+		width: 100%;
+		height: 12px;
+		background: rgba(0, 0, 0, 0.1);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, var(--md-sys-color-primary) 0%, var(--md-sys-color-tertiary) 100%);
+		transition: width 0.5s ease-in-out;
+		border-radius: 8px;
+	}
+
+	.next-threshold {
+		margin: 8px 0 0 0;
+		font-size: 13px;
+		color: var(--md-sys-color-on-tertiary-container);
+	}
+
+	.max-rank {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 500;
+		color: var(--md-sys-color-on-primary-container);
+		text-align: center;
 	}
 
 	.stats-grid {
