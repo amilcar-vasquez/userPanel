@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/githublogoSA.png" content ="width=device-width, initial-scale=1.0" >
     <title>GitHub Profile Dashboard - Project Presentation</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reset.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
@@ -200,60 +201,43 @@
                 </div>
             </section>
 
-            <!-- Slide 6: Backend - GitHub Client -->
+            <!-- Slide 6: Docker Overview -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg" alt="Go" style="height: 40px;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 40px;">
                 </div>
-                <h2><span class="material-symbols-outlined title-icon">build</span> Backend: GitHub Integration</h2>
-                <pre style="font-size: 0.4em;"><code class="language-go">// internal/github/client.go
-type Client struct {
-    client *githubv4.Client
-}
-
-type UserProfileStats struct {
-    Login                 string
-    Name                  string
-    AvatarURL             string
-    Bio                   string
-    TotalCommits          int
-    TotalPullRequests     int
-    TotalIssues           int
-    TotalReviews          int
-    TotalStarsEarned      int
-    Followers             int
-    ContributionCalendar  ContributionCalendar
-    PinnedRepositories    []Repository
-}</code></pre>
-                <p >Uses GraphQL for efficient data fetching</p>
+                <h2><span class="material-symbols-outlined title-icon">cloud</span> Docker Overview</h2>
+                <div class="feature-list" style="margin: 20px; text-align: left;">
+                    <ul style="font-size: 0.9em;">
+                        <li><strong>Definition:</strong> Docker is an open-source platform that simplifies building, shipping, and running applications using containers.</li>
+                        <li><strong>Problem solved:</strong> Ensures environment consistency across developer laptops, test servers, and production by packaging an app and its dependencies together.</li>
+                        <li><strong>Why containers vs VMs:</strong> Containers share the host OS kernel, making them lightweight, efficient, and fast to start compared to full virtual machines.</li>
+                        <li><strong>Key objects:</strong>
+                            <ul style="margin-top:6px; font-size:0.85em;">
+                                <li><code>Dockerfile</code> — a scripted set of instructions used to build a <em>Docker Image</em>.</li>
+                                <li><code>Docker Image</code> — a read-only template (artifact) produced from a Dockerfile.</li>
+                                <li><code>Docker Container</code> — a live, isolated, runnable instance created from an image.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </section>
 
-            <!-- Slide 7: Backend - Rank Calculator -->
+            <!-- Slide 7: Docker Client–Server Architecture -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg" alt="Go" style="height: 40px;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 40px;">
                 </div>
-                <h2><span class="material-symbols-outlined title-icon">target</span> Rank Calculation Logic</h2>
-                <pre style="font-size: 0.35em;"><code class="language-go">// internal/github/rank.go
-func CalculateRank(stats *UserProfileStats) RankInfo {
-    score := (stats.TotalCommits * 2) +
-             (stats.TotalPullRequests * 3) +
-             (stats.TotalIssues * 1) +
-             (stats.TotalReviews * 2) +
-             (stats.TotalStarsEarned * 4) +
-             (stats.Followers * 1)
-
-    rank, nextRank, threshold := determineRank(score)
-    progress := calculateProgress(score, threshold)
-
-    return RankInfo{
-        Rank:               rank,
-        Score:              score,
-        NextRank:           nextRank,
-        NextRankThreshold:  threshold,
-        ProgressPercent:    progress,
-    }
-}</code></pre>
+                <h2><span class="material-symbols-outlined title-icon">devices</span> Docker: Client–Server Architecture</h2>
+                <div class="feature-list" style="margin: 20px; text-align: left;">
+                    <ul style="font-size: 0.9em;">
+                        <li><strong>Architecture:</strong> Docker uses a client–server model — the <code>Docker Client</code> (CLI) talks to the <code>Docker Daemon (dockerd)</code> running on the host.</li>
+                        <li><strong>Daemon role:</strong> The Daemon manages Docker objects: images, containers, networks, and volumes (persistent storage).</li>
+                        <li><strong>Standard workflow:</strong> Define environment in a <code>Dockerfile</code> → Daemon builds an immutable <code>Docker Image</code> → push image to a Registry (e.g., Docker Hub) → run a <code>Container</code> from the image in target environment.</li>
+                        <li><strong>Version note:</strong> Docker Engine community releases are commonly in the <code>24.0+</code> series; consult the official docs for the latest stable download per OS.</li>
+                        <li><strong>Why it matters:</strong> This model centralizes build/run operations and makes deployments reproducible, portable, and consistent across environments.</li>
+                    </ul>
+                </div>
             </section>
 
             <!-- Slide 8: Frontend - State Management -->
@@ -306,66 +290,70 @@ export async function fetchGithubProfile():
 }</code></pre>
             </section>
 
-            <!-- Slide 10: UI Components -->
+            <!-- Slide 10: Docker Install & Quick Setup -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://material.io/static/assets/material-icon.svg" alt="Material Design" style="height: 50px;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
                 </div>
-                <h2><span class="material-symbols-outlined title-icon">palette</span> Material Design 3 UI</h2>
-                <div class="feature-list" style="margin: 20px;">
-                    <ul style="font-size: 0.8em;">
-                        <li ><span class="material-symbols-outlined small-icon">badge</span><strong>Rank Card:</strong> Gradient badges with progress bars</li>
-                        <li ><span class="material-symbols-outlined small-icon">grid_view</span><strong>Stats Grid:</strong> 6 cards showing commits, PRs, issues, reviews, stars, followers</li>
-                        <li ><span class="material-symbols-outlined small-icon">calendar_month</span><strong>Contribution Calendar:</strong> Heat map visualization of yearly activity</li>
-                        <li ><span class="material-symbols-outlined small-icon">folder</span><strong>Pinned Repos:</strong> Showcase top repositories with stats</li>
-                        <li ><span class="material-symbols-outlined small-icon">settings</span><strong>Settings Dialog:</strong> GitHub credentials management</li>
+                <h2><span class="material-symbols-outlined title-icon">cloud</span> Docker: Install & Quick Setup</h2>
+                <div class="feature-list" style="margin: 20px; text-align: left;">
+                    <ul style="font-size: 0.85em;">
+                        <li><strong>What:</strong> Docker provides container runtime; Docker Compose manages multi-service stacks.</li>
+                        <li><strong>Windows / macOS:</strong> Install <code>Docker Desktop</code> from <a href="https://docs.docker.com/desktop/">https://docs.docker.com/desktop/</a>. Enable WSL2 on Windows if prompted.</li>
+                        <li><strong>Linux (Ubuntu/Debian):</strong> install via package manager:
+                            <pre style="font-size:0.6em;"><code>sudo apt update
+sudo apt install -y docker.io docker-compose
+sudo usermod -aG docker $USER</code></pre>
+                        </li>
+                        <li><strong>Quick start (repo root):</strong>
+                            <pre style="font-size:0.5em;"><code>docker compose up --build -d
+
+# view logs
+docker compose logs -f
+
+# stop and remove
+docker compose down</code></pre>
+                        </li>
+                        <li><strong>Notes:</strong> Use a <code>.env</code> or <code>backend/.env</code> to set secrets (e.g., <code>JWT_SECRET</code>); volume <code>db_data</code> persists Postgres data; service healthchecks control startup order.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Slide 11: Security Features -->
+            <!-- Slide 11: Benefits, Use Cases, and Application -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://jwt.io/img/pic_logo.svg" alt="JWT" style="height: 40px;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 40px;">
                 </div>
-                <h2><span class="material-symbols-outlined title-icon">lock</span> Security & Authentication</h2>
+                <h2><span class="material-symbols-outlined title-icon">lightbulb</span> Benefits, Use Cases, and Application</h2>
                 <div style="text-align: left; margin: 25px;">
-                    <ul style="font-size: 0.75em;">
-                        <li ><span class="material-symbols-outlined small-icon">key</span><strong>JWT Tokens:</strong> HS256 algorithm, 24-hour expiry</li>
-                        <li ><span class="material-symbols-outlined small-icon">encrypted</span><strong>Password Hashing:</strong> bcrypt with cost factor 10</li>
-                        <li ><span class="material-symbols-outlined small-icon">security</span><strong>Token Storage:</strong> Encrypted GitHub personal access tokens</li>
-                        <li ><span class="material-symbols-outlined small-icon">shield</span><strong>CORS Protection:</strong> Configured frontend whitelist</li>
-                        <li ><span class="material-symbols-outlined small-icon">restore</span><strong>Soft Deletes:</strong> Recoverable account deletion</li>
-                        <li ><span class="material-symbols-outlined small-icon">check_circle</span><strong>Input Validation:</strong> Email normalization & sanitization</li>
+                    <ul style="font-size: 0.85em;">
+                        <li><strong>Portability & Consistency:</strong> Eliminates environment-related issues by packaging apps with their dependencies, ensuring identical behavior across laptop, test, and production.</li>
+                        <li><strong>Faster Deployments & Cost Efficiency:</strong> Containers start quickly and use resources more efficiently than VMs, enabling rapid deployment cycles and lower infrastructure costs.</li>
+                        <li><strong>Microservices Foundation:</strong> Ideal for microservices — apps can be split into smaller, independently deployable units.
+                        </li>
+                        <li><strong>DevOps & CI/CD:</strong> Standardized container images simplify CI/CD pipelines so the code tested is the same code deployed.</li>
+                        <li><strong>Reliability:</strong> Containers promote reproducible builds and predictable runtime behavior, accelerating iteration and reducing debugging time.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Slide 12: Database Schema -->
+          <!-- Slide 12: Container Security Best Practices -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL" style="height: 50px;">
-                    <img src="https://gorm.io/gorm.svg" alt="GORM" style="height: 40px; margin-left: 10px;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
                 </div>
-                <h2><span class="material-symbols-outlined title-icon">storage</span> Database Design</h2>
-                <pre style="font-size: 0.4em;"><code class="language-sql">-- PostgreSQL Schema
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    github_username TEXT,
-    github_token TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    deleted_at TIMESTAMP
-);
-
-CREATE INDEX idx_users_email ON users(email);
-CREATE INDEX idx_users_deleted_at ON users(deleted_at);</code></pre>
-                <p >GORM auto-migration with indexes for performance</p>
+                <h2><span class="material-symbols-outlined title-icon">security</span> Container Security: Best Practices</h2>
+                <div style="text-align: left; margin: 25px;">
+                    <ul style="font-size: 0.85em;">
+                        <li><strong>Minimal & Trusted Images:</strong> Use minimal base images (e.g., Alpine) from trusted sources to reduce attack surface.</li>
+                        <li><strong>Image Scanning:</strong> Scan images for known CVEs before deployment (tools: Trivy, Docker Scan, Clair).</li>
+                        <li><strong>Least Privilege at Runtime:</strong> Run containers as a non-root user and restrict Linux capabilities.</li>
+                        <li><strong>Secrets Management:</strong> Do not bake secrets into images; inject them at runtime via secrets managers or environment variables stored securely.</li>
+                        <li><strong>Runtime Hardening:</strong> Limit container access to host resources, use read-only filesystems where possible, and enable resource limits (CPU/memory).</li>
+                    </ul>
+                </div>
             </section>
-
+  
             <!-- Slide 13: Deployment -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
@@ -393,21 +381,6 @@ services:
     build: ./frontend
     ports: ["5173:5173"]
     depends_on: [api]</code></pre>
-            </section>
-
-            <!-- Slide 14: Demo & Results -->
-            <section class="tech-bg">
-                <h2><span class="material-symbols-outlined title-icon">play_circle</span> Key Features Demo</h2>
-                <div style="text-align: left; margin: 25px;">
-                    <ol style="font-size: 0.8em;">
-                        <li ><span class="material-symbols-outlined small-icon">login</span><strong>User Registration/Login</strong> → JWT authentication</li>
-                        <li ><span class="material-symbols-outlined small-icon">integration_instructions</span><strong>GitHub Setup</strong> → Configure username & token</li>
-                        <li ><span class="material-symbols-outlined small-icon">dashboard</span><strong>Profile Dashboard</strong> → View rank, stats, calendar</li>
-                        <li ><span class="material-symbols-outlined small-icon">upgrade</span><strong>Rank Progress</strong> → Track advancement to next tier</li>
-                        <li ><span class="material-symbols-outlined small-icon">folder_open</span><strong>Repository Showcase</strong> → Pinned repos with languages</li>
-                        <li ><span class="material-symbols-outlined small-icon">manage_accounts</span><strong>Account Management</strong> → Edit name, view info, delete</li>
-                    </ol>
-                </div>
             </section>
 
             <!-- Slide 15: Conclusion -->
