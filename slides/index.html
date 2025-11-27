@@ -239,8 +239,71 @@
                     </ul>
                 </div>
             </section>
+   <!-- Slide 11: Benefits, Use Cases, and Application -->
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 40px;">
+                </div>
+                <h2><span class="material-symbols-outlined title-icon">lightbulb</span> Benefits, Use Cases, and Application</h2>
+                <div style="text-align: left; margin: 25px;">
+                    <ul style="font-size: 0.85em;">
+                        <li><strong>Portability & Consistency:</strong> Eliminates environment-related issues by packaging apps with their dependencies, ensuring identical behavior across laptop, test, and production.</li>
+                        <li><strong>Faster Deployments & Cost Efficiency:</strong> Containers start quickly and use resources more efficiently than VMs, enabling rapid deployment cycles and lower infrastructure costs.</li>
+                        <li><strong>Microservices Foundation:</strong> Ideal for microservices — apps can be split into smaller, independently deployable units.
+                        </li>
+                        <li><strong>DevOps & CI/CD:</strong> Standardized container images simplify CI/CD pipelines so the code tested is the same code deployed.</li>
+                        <li><strong>Reliability:</strong> Containers promote reproducible builds and predictable runtime behavior, accelerating iteration and reducing debugging time.</li>
+                    </ul>
+                </div>
+            </section>
 
-            <!-- Slide 8: Frontend - State Management -->
+          <!-- Slide 12: Container Security Best Practices -->
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
+                </div>
+                <h2><span class="material-symbols-outlined title-icon">security</span> Container Security: Best Practices</h2>
+                <div style="text-align: left; margin: 25px;">
+                    <ul style="font-size: 0.85em;">
+                        <li><strong>Minimal & Trusted Images:</strong> Use minimal base images (e.g., Alpine) from trusted sources to reduce attack surface.</li>
+                        <li><strong>Image Scanning:</strong> Scan images for known CVEs before deployment (tools: Trivy, Docker Scan, Clair).</li>
+                        <li><strong>Least Privilege at Runtime:</strong> Run containers as a non-root user and restrict Linux capabilities.</li>
+                        <li><strong>Secrets Management:</strong> Do not bake secrets into images; inject them at runtime via secrets managers or environment variables stored securely.</li>
+                        <li><strong>Runtime Hardening:</strong> Limit container access to host resources, use read-only filesystems where possible, and enable resource limits (CPU/memory).</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Slide 10: Docker Install & Quick Setup -->
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
+                </div>
+                <h2><span class="material-symbols-outlined title-icon">cloud</span> Docker: Install & Quick Setup</h2>
+                <div class="feature-list" style="margin: 20px; text-align: left;">
+                    <ul style="font-size: 0.85em;">
+                        <li><strong>What:</strong> Docker provides container runtime; Docker Compose manages multi-service stacks.</li>
+                        <li><strong>Windows / macOS:</strong> Install <code>Docker Desktop</code> from <a href="https://docs.docker.com/desktop/">https://docs.docker.com/desktop/</a>. Enable WSL2 on Windows if prompted.</li>
+                        <li><strong>Linux (Ubuntu/Debian):</strong> install via package manager:
+                            <pre style="font-size:0.6em;"><code>sudo apt update
+sudo apt install -y docker.io docker-compose
+sudo usermod -aG docker $USER</code></pre>
+                        </li>
+                        <li><strong>Quick start (repo root):</strong>
+                            <pre style="font-size:0.5em;"><code>docker compose up --build -d
+
+# view logs
+docker compose logs -f
+
+# stop and remove
+docker compose down</code></pre>
+                        </li>
+                        <li><strong>Notes:</strong> Use a <code>.env</code> or <code>backend/.env</code> to set secrets (e.g., <code>JWT_SECRET</code>); volume <code>db_data</code> persists Postgres data; service healthchecks control startup order.</li>
+                    </ul>
+                </div>
+            </section>
+
+         
+              <!-- Slide 8: Frontend - State Management -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Svelte_Logo.svg" alt="Svelte" style="height: 40px;">
@@ -290,70 +353,7 @@ export async function fetchGithubProfile():
 }</code></pre>
             </section>
 
-            <!-- Slide 10: Docker Install & Quick Setup -->
-            <section class="tech-bg">
-                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
-                </div>
-                <h2><span class="material-symbols-outlined title-icon">cloud</span> Docker: Install & Quick Setup</h2>
-                <div class="feature-list" style="margin: 20px; text-align: left;">
-                    <ul style="font-size: 0.85em;">
-                        <li><strong>What:</strong> Docker provides container runtime; Docker Compose manages multi-service stacks.</li>
-                        <li><strong>Windows / macOS:</strong> Install <code>Docker Desktop</code> from <a href="https://docs.docker.com/desktop/">https://docs.docker.com/desktop/</a>. Enable WSL2 on Windows if prompted.</li>
-                        <li><strong>Linux (Ubuntu/Debian):</strong> install via package manager:
-                            <pre style="font-size:0.6em;"><code>sudo apt update
-sudo apt install -y docker.io docker-compose
-sudo usermod -aG docker $USER</code></pre>
-                        </li>
-                        <li><strong>Quick start (repo root):</strong>
-                            <pre style="font-size:0.5em;"><code>docker compose up --build -d
 
-# view logs
-docker compose logs -f
-
-# stop and remove
-docker compose down</code></pre>
-                        </li>
-                        <li><strong>Notes:</strong> Use a <code>.env</code> or <code>backend/.env</code> to set secrets (e.g., <code>JWT_SECRET</code>); volume <code>db_data</code> persists Postgres data; service healthchecks control startup order.</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Slide 11: Benefits, Use Cases, and Application -->
-            <section class="tech-bg">
-                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 40px;">
-                </div>
-                <h2><span class="material-symbols-outlined title-icon">lightbulb</span> Benefits, Use Cases, and Application</h2>
-                <div style="text-align: left; margin: 25px;">
-                    <ul style="font-size: 0.85em;">
-                        <li><strong>Portability & Consistency:</strong> Eliminates environment-related issues by packaging apps with their dependencies, ensuring identical behavior across laptop, test, and production.</li>
-                        <li><strong>Faster Deployments & Cost Efficiency:</strong> Containers start quickly and use resources more efficiently than VMs, enabling rapid deployment cycles and lower infrastructure costs.</li>
-                        <li><strong>Microservices Foundation:</strong> Ideal for microservices — apps can be split into smaller, independently deployable units.
-                        </li>
-                        <li><strong>DevOps & CI/CD:</strong> Standardized container images simplify CI/CD pipelines so the code tested is the same code deployed.</li>
-                        <li><strong>Reliability:</strong> Containers promote reproducible builds and predictable runtime behavior, accelerating iteration and reducing debugging time.</li>
-                    </ul>
-                </div>
-            </section>
-
-          <!-- Slide 12: Container Security Best Practices -->
-            <section class="tech-bg">
-                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
-                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
-                </div>
-                <h2><span class="material-symbols-outlined title-icon">security</span> Container Security: Best Practices</h2>
-                <div style="text-align: left; margin: 25px;">
-                    <ul style="font-size: 0.85em;">
-                        <li><strong>Minimal & Trusted Images:</strong> Use minimal base images (e.g., Alpine) from trusted sources to reduce attack surface.</li>
-                        <li><strong>Image Scanning:</strong> Scan images for known CVEs before deployment (tools: Trivy, Docker Scan, Clair).</li>
-                        <li><strong>Least Privilege at Runtime:</strong> Run containers as a non-root user and restrict Linux capabilities.</li>
-                        <li><strong>Secrets Management:</strong> Do not bake secrets into images; inject them at runtime via secrets managers or environment variables stored securely.</li>
-                        <li><strong>Runtime Hardening:</strong> Limit container access to host resources, use read-only filesystems where possible, and enable resource limits (CPU/memory).</li>
-                    </ul>
-                </div>
-            </section>
-  
             <!-- Slide 13: Deployment -->
             <section class="tech-bg">
                 <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
