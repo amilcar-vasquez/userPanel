@@ -10,9 +10,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
-        .reveal { font-size: 32px; }
-        .reveal h1 { font-size: 2.2em; text-transform: none; }
-        .reveal h2 { font-size: 1.8em; text-transform: none; }
+        .reveal {
+            font-size: 32px;
+            background: radial-gradient(ellipse at center, #1a2332 0%, #000000 100%);
+        }
+        .reveal h1 { font-size: 2.2em; text-transform: none; text-shadow: 0 0 20px rgba(103, 80, 164, 0.5); }
+        .reveal h2 { font-size: 1.8em; text-transform: none; text-shadow: 0 0 15px rgba(103, 80, 164, 0.4); }
         .reveal h3 { font-size: 1.3em; text-transform: none; }
         .reveal p { font-size: 0.9em; line-height: 1.4; }
         .reveal ul, .reveal ol { font-size: 0.85em; line-height: 1.5; }
@@ -40,17 +43,30 @@
             margin: 15px 0; 
         }
         .reveal .stat-card { 
-            background: rgba(103, 80, 164, 0.2); 
+            background: linear-gradient(135deg, rgba(103, 80, 164, 0.3) 0%, rgba(187, 134, 252, 0.15) 100%); 
             padding: 15px; 
             border-radius: 16px;
-            border: 1px solid rgba(103, 80, 164, 0.3);
+            border: 1px solid rgba(103, 80, 164, 0.4);
+            box-shadow: 0 4px 15px rgba(103, 80, 164, 0.2);
         }
         .reveal .stat-card h3 { font-size: 1em; margin: 10px 0; }
         .reveal .stat-card p { font-size: 0.7em; }
         .reveal .feature-list { text-align: left; }
         .reveal code { color: #e83e8c; font-size: 0.85em; }
-        .reveal pre { font-size: 0.5em; }
+        .reveal pre { font-size: 0.5em; background: rgba(0, 0, 0, 0.5); border-radius: 8px; }
         .reveal pre code { max-height: 450px; font-size: 1em; }
+        .tech-logo { 
+            height: 60px; 
+            margin: 10px 20px; 
+            filter: drop-shadow(0 0 10px rgba(103, 80, 164, 0.5));
+        }
+        .screenshot-img {
+            max-width: 90%;
+            max-height: 500px;
+            border-radius: 16px;
+            border: 2px solid rgba(103, 80, 164, 0.5);
+            box-shadow: 0 8px 32px rgba(103, 80, 164, 0.4);
+        }
         .material-symbols-outlined {
             font-family: 'Material Symbols Outlined';
             font-weight: normal;
@@ -81,50 +97,53 @@
         <div class="slides">
             
             <!-- Slide 1: Title -->
-            <section>
+            <section class="tech-bg">
                 <h1><span class="material-symbols-outlined title-icon">rocket_launch</span> GitHub Profile Dashboard</h1>
                 <h3 style="font-size: 1.1em;">Enhanced Developer Analytics with Rank System</h3>
-                <p style="margin-top: 60px;">
+                <div style="margin: 40px 0;">
+                    <img src="images/welcomeScreen.png" alt="Welcome Screen" class="screenshot-img" style="max-height: 350px;">
+                </div>
+                <p style="margin-top: 30px;">
                     <strong>Created by:</strong><br>
-                    Amilcar Vasquez & D'Alisseo Requena
+                    Amilcar Vasquez & D'Alesseo Requena
                 </p>
-                <p style="margin-top: 40px; font-size: 0.8em; color: #888;">
+                <p style="margin-top: 20px; font-size: 0.7em; color: #888;">
                     Press <kbd>Space</kbd> to navigate
                 </p>
             </section>
 
             <!-- Slide 2: Problem Statement -->
-            <section>
+            <section class="tech-bg">
                 <h2><span class="material-symbols-outlined title-icon">lightbulb</span> The Challenge</h2>
                 <div style="text-align: left; margin: 30px;">
                     <p style="font-size: 0.85em;"><strong>Primary Objective:</strong> Build a reusable authentication API that can be integrated into any project</p>
                     <p style="margin-top: 20px; font-size: 0.85em;">GitHub profiles show basic stats, but lack:</p>
                     <ul>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">analytics</span>Comprehensive contribution analysis</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">emoji_events</span>Developer ranking system</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">trending_up</span>Progress tracking visualization</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">stars</span>Gamified achievement metrics</li>
+                        <li ><span class="material-symbols-outlined small-icon">analytics</span>Comprehensive contribution analysis</li>
+                        <li ><span class="material-symbols-outlined small-icon">emoji_events</span>Developer ranking system</li>
+                        <li ><span class="material-symbols-outlined small-icon">trending_up</span>Progress tracking visualization</li>
+                        <li ><span class="material-symbols-outlined small-icon">stars</span>Gamified achievement metrics</li>
                     </ul>
-                    <p class="fragment" style="margin-top: 40px; font-style: italic;">
+                    <p  style="margin-top: 40px; font-style: italic;">
                         Solution: Create a reusable auth API + showcase it with an enhanced GitHub profile viewer
                     </p>
                 </div>
             </section>
 
             <!-- Slide 3: Solution Overview -->
-            <section>
+            <section class="tech-bg">
                 <h2><span class="material-symbols-outlined title-icon">auto_awesome</span> Our Solution</h2>
                 <p>Reusable RESTful authentication API with a compelling demo application</p>
                 <div class="stat-grid" style="margin-top: 40px;">
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                         <h3><span class="material-symbols-outlined" style="font-size: 36px;">lock</span><br>Auth API</h3>
                         <p>JWT-based authentication service designed for reusability</p>
                     </div>
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                         <h3><span class="material-symbols-outlined" style="font-size: 36px;">analytics</span><br>Analytics</h3>
                         <p>Real-time GitHub stats via GraphQL API</p>
                     </div>
-                    <div class="stat-card fragment">
+                    <div class="stat-card">
                         <h3><span class="material-symbols-outlined" style="font-size: 36px;">emoji_events</span><br>Ranking</h3>
                         <p>7-tier developer rank system</p>
                     </div>
@@ -132,50 +151,60 @@
             </section>
 
             <!-- Slide 4: Architecture -->
-            <section>
+            <section class="tech-bg">
                 <h2><span class="material-symbols-outlined title-icon">architecture</span> System Architecture</h2>
                 <div class="tech-stack">
                     <div class="tech-item fragment">
                         <h3>Backend</h3>
-                        <p>Go 1.24</p>
-                        <p>Chi Router</p>
-                        <p>GORM ORM</p>
-                        <p>PostgreSQL 16</p>
+                        <img src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg" alt="Go" class="tech-logo">
+                        <img src="https://gorm.io/gorm.svg" alt="GORM" class="tech-logo" style="height: 45px;">
+                        <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL" class="tech-logo">
                     </div>
                     <div class="tech-item fragment">
                         <h3>Frontend</h3>
-                        <p>SvelteKit</p>
-                        <p>TypeScript</p>
-                        <p>Material Design 3</p>
-                        <p>Vite</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Svelte_Logo.svg" alt="Svelte" class="tech-logo">
+                        <img src="https://www.typescriptlang.org/icons/icon-512x512.png" alt="TypeScript" class="tech-logo" style="height: 50px;">
+                        <img src="https://www.svgrepo.com/show/503418/material-design.svg" alt="Material Design" class="tech-logo">
+                        <img src="https://vitejs.dev/logo.svg" alt="Vite" class="tech-logo">
                     </div>
                     <div class="tech-item fragment">
                         <h3>Integration</h3>
-                        <p>GitHub GraphQL API v4</p>
-                        <p>OAuth2</p>
-                        <p>JWT Auth</p>
-                        <p>Docker Compose</p>
+                        <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="GitHub" class="tech-logo" style="filter: invert(1) drop-shadow(0 0 10px rgba(103, 80, 164, 0.5));">
+                        <img src="https://oauth.net/images/oauth-2-sm.png" alt="OAuth2" class="tech-logo" style="height: 40px;">
+                        <img src="https://jwt.io/img/pic_logo.svg" alt="JWT" class="tech-logo">
+                        <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" class="tech-logo">
                     </div>
                 </div>
             </section>
 
             <!-- Slide 5: Developer Rank System -->
-            <section>
+            <section class="tech-bg">
                 <h2><span class="material-symbols-outlined title-icon">emoji_events</span> Developer Rank System</h2>
-                <p>Weighted scoring algorithm across 6 metrics:</p>
-                <pre style="font-size: 0.5em;"><code class="language-go">Score = (Commits × 2) + (PRs × 3) + (Issues × 1) + 
-        (Reviews × 2) + (Stars × 4) + (Followers × 1)</code></pre>
-                <div style="margin-top: 30px;">
-                    <div class="rank-badge rank-splus">S+</div>
-                    <div class="rank-badge rank-s">S</div>
-                    <div class="rank-badge rank-aplus">A+</div>
-                    <div class="rank-badge rank-a">A</div>
+                <div style="display: flex; gap: 40px; align-items: center; justify-content: center; margin: 30px 0;">
+                    <div style="flex: 1;">
+                        <p style="font-size: 0.75em;">Weighted scoring algorithm across 6 metrics:</p>
+                        <pre style="font-size: 0.4em; margin: 15px 0;"><code class="language-go">Score = (Commits × 2) + (PRs × 3) + 
+        (Issues × 1) + (Reviews × 2) + 
+        (Stars × 4) + (Followers × 1)</code></pre>
+                        <div style="margin-top: 20px;">
+                            <div class="rank-badge rank-splus">S+</div>
+                            <div class="rank-badge rank-s">S</div>
+                            <div class="rank-badge rank-aplus">A+</div>
+                            <div class="rank-badge rank-a">A</div>
+                        </div>
+                        <p style="margin-top: 15px; font-size: 0.7em;">7 tiers from C (0-49 pts) to S+ (2000+ pts)</p>
+                    </div>
+                    <div style="flex: 1;">
+                        <img src="images/rankSystem.png" alt="Rank System" class="screenshot-img" style="max-height: 450px;">
+                    </div>
                 </div>
-                <p style="margin-top: 30px; font-size: 0.8em;">7 tiers from C (0-49 pts) to S+ (2000+ pts)</p>
             </section>
 
             <!-- Slide 6: Backend - GitHub Client -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg" alt="Go" style="height: 40px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">build</span> Backend: GitHub Integration</h2>
                 <pre style="font-size: 0.4em;"><code class="language-go">// internal/github/client.go
 type Client struct {
@@ -196,11 +225,14 @@ type UserProfileStats struct {
     ContributionCalendar  ContributionCalendar
     PinnedRepositories    []Repository
 }</code></pre>
-                <p class="fragment">Uses GraphQL for efficient data fetching</p>
+                <p >Uses GraphQL for efficient data fetching</p>
             </section>
 
             <!-- Slide 7: Backend - Rank Calculator -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg" alt="Go" style="height: 40px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">target</span> Rank Calculation Logic</h2>
                 <pre style="font-size: 0.35em;"><code class="language-go">// internal/github/rank.go
 func CalculateRank(stats *UserProfileStats) RankInfo {
@@ -225,7 +257,11 @@ func CalculateRank(stats *UserProfileStats) RankInfo {
             </section>
 
             <!-- Slide 8: Frontend - State Management -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Svelte_Logo.svg" alt="Svelte" style="height: 40px;">
+                    <img src="https://www.typescriptlang.org/icons/icon-512x512.png" alt="TypeScript" style="height: 40px; margin-left: 10px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">psychology</span> Frontend: State Management</h2>
                 <pre style="font-size: 0.4em;"><code class="language-typescript">// lib/stores/auth.ts
 export interface User {
@@ -242,11 +278,15 @@ export const isAuthenticated = derived(
     auth, 
     ($auth) => !!$auth.token && !!$auth.user
 );</code></pre>
-                <p class="fragment" style="font-size: 0.8em;">Svelte stores for reactive state management</p>
+                <p  style="font-size: 0.8em;">Svelte stores for reactive state management</p>
             </section>
 
             <!-- Slide 9: Frontend - GitHub API Client -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Svelte_Logo.svg" alt="Svelte" style="height: 40px;">
+                    <img src="https://www.typescriptlang.org/icons/icon-512x512.png" alt="TypeScript" style="height: 40px; margin-left: 10px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">language</span> Frontend: API Integration</h2>
                 <pre style="font-size: 0.35em;"><code class="language-typescript">// lib/github.ts
 export interface GitHubProfileResponse {
@@ -267,36 +307,46 @@ export async function fetchGithubProfile():
             </section>
 
             <!-- Slide 10: UI Components -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://material.io/static/assets/material-icon.svg" alt="Material Design" style="height: 50px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">palette</span> Material Design 3 UI</h2>
                 <div class="feature-list" style="margin: 20px;">
                     <ul style="font-size: 0.8em;">
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">badge</span><strong>Rank Card:</strong> Gradient badges with progress bars</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">grid_view</span><strong>Stats Grid:</strong> 6 cards showing commits, PRs, issues, reviews, stars, followers</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">calendar_month</span><strong>Contribution Calendar:</strong> Heat map visualization of yearly activity</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">folder</span><strong>Pinned Repos:</strong> Showcase top repositories with stats</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">settings</span><strong>Settings Dialog:</strong> GitHub credentials management</li>
+                        <li ><span class="material-symbols-outlined small-icon">badge</span><strong>Rank Card:</strong> Gradient badges with progress bars</li>
+                        <li ><span class="material-symbols-outlined small-icon">grid_view</span><strong>Stats Grid:</strong> 6 cards showing commits, PRs, issues, reviews, stars, followers</li>
+                        <li ><span class="material-symbols-outlined small-icon">calendar_month</span><strong>Contribution Calendar:</strong> Heat map visualization of yearly activity</li>
+                        <li ><span class="material-symbols-outlined small-icon">folder</span><strong>Pinned Repos:</strong> Showcase top repositories with stats</li>
+                        <li ><span class="material-symbols-outlined small-icon">settings</span><strong>Settings Dialog:</strong> GitHub credentials management</li>
                     </ul>
                 </div>
             </section>
 
             <!-- Slide 11: Security Features -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://jwt.io/img/pic_logo.svg" alt="JWT" style="height: 40px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">lock</span> Security & Authentication</h2>
                 <div style="text-align: left; margin: 25px;">
                     <ul style="font-size: 0.75em;">
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">key</span><strong>JWT Tokens:</strong> HS256 algorithm, 24-hour expiry</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">encrypted</span><strong>Password Hashing:</strong> bcrypt with cost factor 10</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">security</span><strong>Token Storage:</strong> Encrypted GitHub personal access tokens</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">shield</span><strong>CORS Protection:</strong> Configured frontend whitelist</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">restore</span><strong>Soft Deletes:</strong> Recoverable account deletion</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">check_circle</span><strong>Input Validation:</strong> Email normalization & sanitization</li>
+                        <li ><span class="material-symbols-outlined small-icon">key</span><strong>JWT Tokens:</strong> HS256 algorithm, 24-hour expiry</li>
+                        <li ><span class="material-symbols-outlined small-icon">encrypted</span><strong>Password Hashing:</strong> bcrypt with cost factor 10</li>
+                        <li ><span class="material-symbols-outlined small-icon">security</span><strong>Token Storage:</strong> Encrypted GitHub personal access tokens</li>
+                        <li ><span class="material-symbols-outlined small-icon">shield</span><strong>CORS Protection:</strong> Configured frontend whitelist</li>
+                        <li ><span class="material-symbols-outlined small-icon">restore</span><strong>Soft Deletes:</strong> Recoverable account deletion</li>
+                        <li ><span class="material-symbols-outlined small-icon">check_circle</span><strong>Input Validation:</strong> Email normalization & sanitization</li>
                     </ul>
                 </div>
             </section>
 
             <!-- Slide 12: Database Schema -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL" style="height: 50px;">
+                    <img src="https://gorm.io/gorm.svg" alt="GORM" style="height: 40px; margin-left: 10px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">storage</span> Database Design</h2>
                 <pre style="font-size: 0.4em;"><code class="language-sql">-- PostgreSQL Schema
 CREATE TABLE users (
@@ -313,11 +363,14 @@ CREATE TABLE users (
 
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_deleted_at ON users(deleted_at);</code></pre>
-                <p class="fragment">GORM auto-migration with indexes for performance</p>
+                <p >GORM auto-migration with indexes for performance</p>
             </section>
 
             <!-- Slide 13: Deployment -->
-            <section>
+            <section class="tech-bg">
+                <div style="position: absolute; top: 20px; right: 20px; opacity: 0.6;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 50px;">
+                </div>
                 <h2><span class="material-symbols-outlined title-icon">deployed_code</span> Docker Deployment</h2>
                 <pre style="font-size: 0.38em;"><code class="language-yaml"># docker-compose.yml
 services:
@@ -343,23 +396,23 @@ services:
             </section>
 
             <!-- Slide 14: Demo & Results -->
-            <section>
+            <section class="tech-bg">
                 <h2><span class="material-symbols-outlined title-icon">play_circle</span> Key Features Demo</h2>
                 <div style="text-align: left; margin: 25px;">
                     <ol style="font-size: 0.8em;">
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">login</span><strong>User Registration/Login</strong> → JWT authentication</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">integration_instructions</span><strong>GitHub Setup</strong> → Configure username & token</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">dashboard</span><strong>Profile Dashboard</strong> → View rank, stats, calendar</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">upgrade</span><strong>Rank Progress</strong> → Track advancement to next tier</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">folder_open</span><strong>Repository Showcase</strong> → Pinned repos with languages</li>
-                        <li class="fragment"><span class="material-symbols-outlined small-icon">manage_accounts</span><strong>Account Management</strong> → Edit name, view info, delete</li>
+                        <li ><span class="material-symbols-outlined small-icon">login</span><strong>User Registration/Login</strong> → JWT authentication</li>
+                        <li ><span class="material-symbols-outlined small-icon">integration_instructions</span><strong>GitHub Setup</strong> → Configure username & token</li>
+                        <li ><span class="material-symbols-outlined small-icon">dashboard</span><strong>Profile Dashboard</strong> → View rank, stats, calendar</li>
+                        <li ><span class="material-symbols-outlined small-icon">upgrade</span><strong>Rank Progress</strong> → Track advancement to next tier</li>
+                        <li ><span class="material-symbols-outlined small-icon">folder_open</span><strong>Repository Showcase</strong> → Pinned repos with languages</li>
+                        <li ><span class="material-symbols-outlined small-icon">manage_accounts</span><strong>Account Management</strong> → Edit name, view info, delete</li>
                     </ol>
                 </div>
             </section>
 
             <!-- Slide 15: Conclusion -->
-            <section>
-                <h2><span class="material-symbols-outlined title-icon">celebration</span> Summary</h2>
+            <section class="tech-bg">
+                <h2><span class="material-symbols-outlined title-icon">celebration</span> Summary & Future Work</h2>
                 <div style="text-align: left; margin: 25px;">
                     <h3 style="font-size: 1.1em;">Achievements:</h3>
                     <ul style="font-size: 0.75em;">
@@ -372,15 +425,21 @@ services:
             </section>
 
             <!-- Final Slide: Thank You -->
-            <section>
+            <section class="tech-bg">
                 <h1>Thank You! <span class="material-symbols-outlined title-icon">volunteer_activism</span></h1>
                 <h3 style="margin-top: 40px;">Questions?</h3>
-                <p style="margin-top: 50px; font-size: 0.8em;">
+                <div style="margin-top: 40px; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                    <img src="https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg" alt="Go" style="height: 40px; opacity: 0.8;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Svelte_Logo.svg" alt="Svelte" style="height: 40px; opacity: 0.8;">
+                    <img src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL" style="height: 40px; opacity: 0.8;">
+                    <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" alt="Docker" style="height: 40px; opacity: 0.8;">
+                </div>
+                <p style="margin-top: 40px; font-size: 0.8em;">
                     <strong>GitHub Profile Dashboard</strong><br>
-                    Built with Go, SvelteKit, PostgreSQL, and Docker
+                    Built with Linux from start to finish!
                 </p>
                 <p style="margin-top: 30px; font-size: 0.75em;">
-                    Amilcar Vasquez & D'Alisseo Requena
+                    Amilcar Vasquez & D'Alesseo Requena
                 </p>
             </section>
 
